@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="AbakHelperV2.UserControls.OptionsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:ui="clr-namespace:AbakHelper.Integration.UI;assembly=AbakHelper.Integration"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Margin="16">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBox materialDesign:HintAssist.Hint="Company Name" 
+                     Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
+                 Margin="0 6 0 0"
+                 FontSize="18" Grid.Row="0">
+                <TextBox.Text>
+                    <Binding Path="XeroSettings.CompanyName" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <ui:NotEmptyValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox materialDesign:HintAssist.Hint="Address" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                 Text="{Binding XeroSettings.Address}" AcceptsReturn="True" Height="100" VerticalAlignment="Top"
+                 Margin="0,6,0,0"
+                 FontSize="16" Grid.Row="1"/>
+                    <TextBox materialDesign:HintAssist.Hint="Invoice Recipient Contact Name" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                             Text="{Binding XeroSettings.ContactName}"
+                             Margin="0 8 0 0"
+                             FontSize="16" Grid.Row="2"/>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="0"  Margin="5" VerticalAlignment="Stretch">
+            <ScrollViewer VerticalScrollBarVisibility="Visible"  HorizontalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding Projects}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <GroupBox Header="{Binding Name}">
+                                <StackPanel CanVerticallyScroll="True">
+                                    <TextBox materialDesign:HintAssist.Hint="Project Rate" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                                     Text="{Binding Rate}"
+                                     Margin="0 8 0 0"
+                                     FontSize="16" />
+                                    <ItemsControl ItemsSource="{Binding TaskDefinitions}" Margin="15,0,0,0">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Name}" Margin="0,20,0,0"/>
+                                                    <TextBox materialDesign:HintAssist.Hint="Task Rate" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                                                     Text="{Binding Rate}"
+                                                     Margin="0,8,0,0"
+                                                     FontSize="16" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </GroupBox>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+
+    </Grid>
+</UserControl>
