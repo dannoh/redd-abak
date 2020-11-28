@@ -34,10 +34,12 @@ namespace AbakHelperV2.Services
 
         public T GetComponentSettings<T>(ExportServiceBase component)
         {
-            var settings = (JObject)_settings.ComponentSettings[component.Name];
+            if (!_settings.ComponentSettings.TryGetValue(component.Name, out var settings))
+                return default(T);
+            
             if (settings == null)
                 return default(T);
-            return settings.ToObject<T>();
+            return ((JObject)settings).ToObject<T>();
         }
     }
 }
