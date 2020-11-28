@@ -93,6 +93,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(TargetDir) $(SolutionDir)AbakHelperV2\bin\x86\debug\Plugins\JsonExport</PostBuildEvent>
+    <PostBuildEvent>xcopy $(TargetDir)* $(SolutionDir)AbakHelperV2\bin\x86\debug\Plugins\JsonExport /s /y /i</PostBuildEvent>
   </PropertyGroup>
 </Project>
