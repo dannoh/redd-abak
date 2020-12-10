@@ -1,5 +1,6 @@
 # redd-abak
 A simple tool for exporting Abak timesheet entries.
+Login to Abak, navigate to your timesheet and filter however you need.  Once your desired entries are shown, click the triple-dots in the top right and export.
 ![Alt text](Docs/Screenshot.png?raw=true "Sample Screenshot")
 ## WPF Application
 There is a WPF application that can extract the entries as raw JSON, or export it to Xero.  The app works, though might be a little rough around the edges.
